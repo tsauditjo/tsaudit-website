@@ -28,17 +28,10 @@ a { color: inherit; }
 .wrap { width: 100%; max-width: 68rem; margin-inline: auto; padding-inline: 1.25rem; }
 
 /* الواجهة */
-.hero { background: var(--ink); color: var(--bg); padding-block: 2.5rem 3.5rem; }
+.hero { position: relative; overflow: hidden; background: var(--ink); color: var(--bg); padding-block: 2.5rem 3.5rem; }
+.hero .wrap { position: relative; z-index: 1; }
 .brand { display: flex; align-items: center; gap: 0.875rem; margin-block-end: 2.5rem; }
-.logo-slot {
-  flex: none;
-  width: 4rem; height: 4rem;
-  display: grid; place-items: center;
-  border: 2px dashed var(--gold);
-  color: var(--gold);               /* 4.52:1 على #242424 */
-  font-size: 1.75rem; font-weight: 700; line-height: 1;
-  direction: ltr;
-}
+.logo { flex: none; display: block; width: auto; height: 4rem; }
 .brand-name { font-size: 1.125rem; font-weight: 600; line-height: 1.5; }
 .hero h1 { font-size: 1.625rem; font-weight: 600; line-height: 1.6; max-width: 36rem; margin-block-end: 2rem; }
 
@@ -51,8 +44,8 @@ a { color: inherit; }
 }
 .btn-light { background: var(--bg); color: var(--ink); }
 .btn-light:hover { background: var(--line); }
-.btn-outline { border-color: var(--line); color: var(--bg); cursor: default; }
-.btn-outline[aria-disabled="true"] { opacity: 0.75; }
+.btn-outline { border-color: var(--line); color: var(--bg); }
+.btn-outline:hover { background: var(--muted); }
 
 /* الأقسام */
 .section { padding-block: 3rem; border-block-start: 1px solid var(--line); }
@@ -66,7 +59,8 @@ a { color: inherit; }
 .card p { color: var(--muted); }
 
 .about { display: grid; gap: 1.75rem; }
-.photo-slot { width: 100%; max-width: 15rem; aspect-ratio: 4 / 5; border: 2px dashed var(--line); background: var(--bg); }
+.about h2 { margin-block-end: 0; }
+.about-photo { display: block; width: 100%; max-width: 15rem; height: auto; }
 
 .steps { list-style: none; display: grid; gap: 1.25rem; }
 .steps li { display: flex; align-items: flex-start; gap: 1rem; }
@@ -92,12 +86,13 @@ a { color: inherit; }
 
 /* زر واتساب العائم (الجوال فقط) */
 .fab {
-  position: fixed; inset-block-end: 1rem; inset-inline-start: 1rem; z-index: 10;
-  min-height: 2.75rem; padding: 0.375rem 1.125rem;
-  display: inline-flex; align-items: center;
+  position: fixed; bottom: 1rem; left: 1rem; z-index: 10;   /* يسار الشاشة صراحةً، لأن بداية الأسطر على اليمين */
+  width: 2.75rem; height: 2.75rem; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
   background: var(--ink); color: var(--bg);
-  border: 1px solid var(--line); border-radius: 999px;
-  font-size: 0.9375rem; font-weight: 600; text-decoration: none;
+  border: 2px solid var(--bg); border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--ink), 0 2px 8px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity 0.2s ease, visibility 0.2s;
 }
@@ -115,7 +110,10 @@ a { color: inherit; }
   .section { padding-block: 4.5rem; }
   .section h2 { font-size: 1.75rem; }
   .cards { grid-template-columns: repeat(2, 1fr); }
-  .about { grid-template-columns: 15rem 1fr; gap: 3rem; align-items: start; }
+  .about { grid-template-columns: 15rem 1fr; column-gap: 3rem; row-gap: 1.75rem; align-items: start; grid-template-rows: auto 1fr; }
+  .about-photo { grid-column: 1; grid-row: 1 / span 2; }
+  .about h2 { grid-column: 2; grid-row: 1; }
+  .about p { grid-column: 2; grid-row: 2; }
   .contact { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
   .footer { padding-block-end: 1.25rem; }
   .fab { display: none; }
@@ -123,4 +121,11 @@ a { color: inherit; }
 
 @media (min-width: 64rem) {
   .cards { grid-template-columns: repeat(3, 1fr); }
+  /* علامة مائية زخرفية في النصف الأيسر من الواجهة */
+  .hero::after {
+    content: ""; position: absolute; left: 4rem; top: 50%;
+    width: 26rem; height: 20.22rem; transform: translateY(-50%);
+    background: url("assets/logo.svg") center / contain no-repeat;
+    opacity: 0.07; pointer-events: none;
+  }
 }

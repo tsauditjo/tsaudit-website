@@ -9,10 +9,13 @@
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_JO">
+<meta property="og:url" content="https://tsaudit.com/">
 <meta property="og:title" content="مكتب تيسير صافي لتدقيق الحسابات">
 <meta property="og:description" content="تدقيق حسابات واستشارات ضريبية ومالية للشركات والمؤسسات في عمّان">
-<!-- مكان صورة المعاينة: يُضاف لاحقاً -->
-<!-- <meta property="og:image" content="رابط الصورة الكامل"> -->
+<meta property="og:image" content="https://tsaudit.com/assets/og-image.jpg">
+<link rel="canonical" href="https://tsaudit.com/">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +49,7 @@
 <header class="hero" id="hero">
   <div class="wrap">
     <div class="brand">
-      <div class="logo-slot" role="img" aria-label="مكان الشعار">TS</div>
+      <img class="logo" src="assets/logo.svg" alt="" width="82" height="64">
       <p class="brand-name">مكتب تيسير صافي لتدقيق الحسابات</p>
     </div>
     <h1>تدقيق حسابات واستشارات ضريبية ومالية للشركات والمؤسسات في عمّان</h1>
@@ -89,11 +92,9 @@
 
   <section class="section section-alt" id="about">
     <div class="wrap about">
-      <div class="photo-slot" role="img" aria-label="مكان الصورة الشخصية"></div>
-      <div>
-        <h2>عن المكتب</h2>
-        <p>أسس تيسير صافي المكتب في أيلول 2021، وهو محاسب قانوني أردني مرخّص منذ 2021، وعضو في جمعية المحاسبين القانونيين الأردنيين، وحاصل على شهادة المحاسب الإداري المعتمد منذ 2018، ويدرّس موادها منذ العام نفسه. له مسار مهني يمتد لأكثر من عشرين عاماً. يقدّم المكتب خدماته للشركات الصغيرة والمتوسطة والمؤسسات الفردية.</p>
-      </div>
+      <h2>عن المكتب</h2>
+      <img class="about-photo" src="assets/photo.jpg" alt="تيسير صافي" width="800" height="1000" loading="lazy" decoding="async">
+      <p>أسس تيسير صافي المكتب في أيلول 2021، وهو محاسب قانوني أردني مرخّص منذ 2021، وعضو في جمعية المحاسبين القانونيين الأردنيين، وحاصل على شهادة المحاسب الإداري المعتمد منذ 2018، ويدرّس موادها منذ العام نفسه. له مسار مهني يمتد لأكثر من عشرين عاماً. يقدّم المكتب خدماته للشركات الصغيرة والمتوسطة والمؤسسات الفردية.</p>
     </div>
   </section>
 
@@ -135,33 +136,45 @@
       </dl>
       <div class="actions">
         <a class="btn btn-light" href="https://wa.me/962790123999?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%88%D8%B5%D9%84%D8%AA%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%A3%D9%88%D9%84%D9%8A%D8%A9" target="_blank" rel="noopener">واتساب</a>
-        <!-- مكان محجوز: يُضاف رابط الخريطة لاحقاً (href) ثم تُزال aria-disabled -->
-        <span class="btn btn-outline" id="map-btn" aria-disabled="true">الموقع على الخريطة</span>
+        <a class="btn btn-outline" href="https://maps.google.com/?cid=1172281220442005323" target="_blank" rel="noopener noreferrer">الموقع على الخريطة</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="footer">
+<footer class="footer" id="footer">
   <div class="wrap">
     <p>© <span id="year"></span> مكتب تيسير صافي لتدقيق الحسابات</p>
   </div>
 </footer>
 
-<a class="fab" id="fab" aria-label="واتساب" href="https://wa.me/962790123999?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%88%D8%B5%D9%84%D8%AA%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%A3%D9%88%D9%84%D9%8A%D8%A9" target="_blank" rel="noopener">واتساب</a>
+<a class="fab" id="fab" aria-label="واتساب" href="https://wa.me/962790123999?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%88%D8%B5%D9%84%D8%AA%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%A3%D9%88%D9%84%D9%8A%D8%A9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C7 3 3 6.6 3 11c0 2.1.9 4 2.4 5.4L4.5 21l4.4-1.7c1 .3 2 .4 3.1.4 5 0 9-3.600 9-8S17 3 12 3z"/></svg></a>
 
 <script>
 (function () {
   document.getElementById('year').textContent = new Date().getFullYear();
   var fab = document.getElementById('fab');
-  var hero = document.getElementById('hero');
+  var ids = ['hero', 'contact', 'footer'];
+  var els = ids.map(function (id) { return document.getElementById(id); });
+  var seen = {};
+  function update() {
+    var any = ids.some(function (id) { return seen[id]; });
+    fab.classList.toggle('show', !any);
+  }
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) {
-      fab.classList.toggle('show', !e[0].isIntersecting);
-    }).observe(hero);
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+      update();
+    });
+    els.forEach(function (el) { io.observe(el); });
   } else {
     window.addEventListener('scroll', function () {
-      fab.classList.toggle('show', window.scrollY > hero.offsetHeight);
+      var h = window.innerHeight;
+      ids.forEach(function (id, i) {
+        var r = els[i].getBoundingClientRect();
+        seen[id] = r.bottom > 0 && r.top < h;
+      });
+      update();
     });
   }
 })();
