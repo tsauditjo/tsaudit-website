@@ -32,7 +32,10 @@ a { color: inherit; }
 .hero .wrap { position: relative; z-index: 1; }
 .brand { display: flex; align-items: center; gap: 0.875rem; margin-block-end: 2.5rem; }
 .logo { flex: none; display: block; width: auto; height: 4rem; }
-.brand-name { flex: 1; min-width: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.4; text-wrap: balance; }
+.brand-name { flex: 1; min-width: 0; line-height: 1.4; }
+.brand-l1, .brand-l2 { display: block; white-space: nowrap; }
+.brand-l1 { font-size: 1.25rem; font-weight: 700; }
+.brand-l2 { font-size: 0.9375rem; font-weight: 400; line-height: 1.5; }
 .hero h1 { font-size: 1.625rem; font-weight: 600; line-height: 1.6; max-width: 36rem; margin-block-end: 2rem; }
 
 /* الأزرار */
@@ -79,7 +82,10 @@ a { color: inherit; }
 .contact dt { color: var(--line); font-size: 0.9375rem; }
 .contact dd { font-weight: 500; overflow-wrap: anywhere; }
 .contact a { text-decoration-color: var(--line); text-underline-offset: 4px; }
-.contact a[dir="ltr"] { display: inline-block; }
+.contact a[dir="ltr"] { display: inline-block; position: relative; }
+/* توسيع مساحة اللمس إلى 44 بكسل على الأقل دون تغيير الشكل */
+.contact a[dir="ltr"]::after { content: ""; position: absolute; inset-block: -0.4375rem; inset-inline: 0; }
+.addr-line { display: block; }
 .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 /* التذييل */
@@ -92,7 +98,7 @@ a { color: inherit; }
   display: inline-flex; align-items: center; justify-content: center;
   background: var(--ink); color: var(--bg);
   border: 2px solid var(--bg); border-radius: 999px;
-  box-shadow: 0 0 0 1px var(--ink), 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 1px var(--ink), 0 2px 8px rgba(36, 36, 36, 0.25);
   text-decoration: none;
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity 0.2s ease, visibility 0.2s;
@@ -107,7 +113,8 @@ a { color: inherit; }
 @media (min-width: 45rem) {
   .hero { padding-block: 4rem 5rem; }
   .hero h1 { font-size: 2.125rem; }
-  .brand-name { font-size: 1.625rem; }
+  .brand-l1 { font-size: 1.5rem; }
+  .brand-l2 { font-size: 1.0625rem; }
   .section { padding-block: 4.5rem; }
   .section h2 { font-size: 1.75rem; }
   .cards { grid-template-columns: repeat(2, 1fr); }
