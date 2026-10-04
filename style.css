@@ -49,6 +49,8 @@ a { color: inherit; }
 .btn-light:hover { background: var(--line); }
 .btn-outline { border-color: var(--line); color: var(--bg); }
 .btn-outline:hover { background: var(--muted); }
+.btn-dark { background: var(--ink); color: var(--bg); }
+.btn-dark:hover { background: var(--muted); }
 
 /* الأقسام */
 .section { padding-block: 3rem; border-block-start: 1px solid var(--line); }
@@ -76,6 +78,29 @@ a { color: inherit; }
 }
 .steps p { padding-block-start: 0.25rem; }
 
+/* سطور ثانوية */
+.note { color: var(--muted); font-size: 0.9375rem; margin-block-start: 1.5rem; }
+.about-text .note { margin-block-start: 1rem; }
+
+/* الأسئلة الشائعة */
+.faq { border-block-start: 1px solid var(--line); }
+.faq-item { border-block-end: 1px solid var(--line); }
+.faq-item summary {
+  position: relative; display: block; list-style: none; cursor: pointer;
+  min-height: 3rem; padding-block: 0.875rem; padding-inline-end: 2rem;
+  font-weight: 600; line-height: 1.6;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: ""; position: absolute; inset-inline-end: 0.5rem; top: 50%;
+  width: 0.625rem; height: 0.625rem; margin-block-start: -0.5rem;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); transition: transform 0.2s ease;   /* سهم للأسفل، يصبح للأعلى عند الفتح */
+}
+.faq-item[open] summary::after { transform: rotate(-135deg); margin-block-start: -0.125rem; }
+.faq-item p { color: var(--muted); padding-block: 0 1.25rem; }
+#faq .note { margin-block-end: 1.5rem; }
+
 /* التواصل */
 .section-dark { background: var(--ink); color: var(--bg); border-block-start: 0; }
 .contact { display: grid; gap: 1.25rem; margin-block-end: 2rem; }
@@ -86,10 +111,14 @@ a { color: inherit; }
 /* توسيع مساحة اللمس إلى 44 بكسل على الأقل دون تغيير الشكل */
 .contact a[dir="ltr"]::after { content: ""; position: absolute; inset-block: -0.4375rem; inset-inline: 0; }
 .addr-line { display: block; }
+.contact .sub { display: block; font-size: 0.9375rem; font-weight: 400; color: var(--line); }
 .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 /* التذييل */
-.footer { background: var(--ink); color: var(--line); border-block-start: 1px solid var(--muted); padding-block: 1.25rem 5.5rem; font-size: 0.9375rem; text-align: center; }
+.footer { background: var(--ink); color: var(--line); border-block-start: 1px solid var(--muted); padding-block: 2rem 5.5rem; font-size: 0.9375rem; text-align: center; }
+.footer-title { font-size: 1rem; font-weight: 600; color: var(--bg); margin-block-end: 0.5rem; }
+.useful { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-direction: column; align-items: center; }
+.useful a { display: inline-block; padding-block: 0.625rem; text-decoration-color: var(--muted); text-underline-offset: 4px; }
 
 /* زر واتساب العائم (الجوال فقط) */
 .fab {
@@ -108,6 +137,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .fab { transition: none; }
+  .faq-item summary::after { transition: none; }
 }
 
 @media (min-width: 45rem) {
@@ -123,7 +153,8 @@ a { color: inherit; }
   .about h2 { grid-column: 2; grid-row: 1; }
   .about-text { grid-column: 2; grid-row: 2; }
   .contact { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
-  .footer { padding-block-end: 1.25rem; }
+  .footer { padding-block-end: 2rem; }
+  .useful { flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 1.75rem; }
   .fab { display: none; }
 }
 
