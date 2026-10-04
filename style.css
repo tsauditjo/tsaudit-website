@@ -69,6 +69,7 @@ a { color: inherit; }
 .about-figure { margin: 0; }
 .about-photo { display: block; width: 100%; max-width: 15rem; height: auto; }
 .about-caption { max-width: 15rem; margin-block-start: 0.5rem; text-align: center; font-size: 0.9375rem; color: var(--muted); }
+.about-caption-name { color: var(--ink); font-weight: 600; }
 
 .steps { list-style: none; display: grid; gap: 1.25rem; }
 .steps li { display: flex; align-items: flex-start; gap: 1rem; }
