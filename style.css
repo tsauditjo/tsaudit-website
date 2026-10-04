@@ -1,0 +1,170 @@
+:root {
+  --bg: #FAF8F2;
+  --ink: #242424;
+  --muted: #68645C;
+  --gold: #A88632;
+  --line: #DED8C8;
+  --font: "IBM Plex Sans Arabic", system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+
+h1, h2, h3, p, ol, dl, dd { margin: 0; padding: 0; }
+
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.wrap { width: 100%; max-width: 68rem; margin-inline: auto; padding-inline: 1.25rem; }
+
+/* الواجهة */
+.hero { position: relative; overflow: hidden; background: var(--ink); color: var(--bg); padding-block: 2.5rem 3.5rem; }
+.hero .wrap { position: relative; z-index: 1; }
+.brand { display: flex; align-items: center; gap: 0.875rem; margin-block-end: 2.5rem; }
+.logo { flex: none; display: block; width: auto; height: 4rem; }
+.brand-name { flex: 1; min-width: 0; line-height: 1.4; }
+.brand-l1, .brand-l2 { display: block; white-space: nowrap; }
+.brand-l1 { font-size: 1.25rem; font-weight: 700; }
+.brand-l2 { font-size: 0.9375rem; font-weight: 400; line-height: 1.5; }
+.hero h1 { font-size: 1.625rem; font-weight: 600; line-height: 1.6; max-width: 36rem; margin-block-end: 2rem; }
+
+/* الأزرار */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 3rem; padding: 0.5rem 1.5rem;
+  border: 1px solid transparent; border-radius: 4px;
+  font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
+}
+.btn-light { background: var(--bg); color: var(--ink); }
+.btn-light:hover { background: var(--line); }
+.btn-outline { border-color: var(--line); color: var(--bg); }
+.btn-outline:hover { background: var(--muted); }
+.btn-dark { background: var(--ink); color: var(--bg); }
+.btn-dark:hover { background: var(--muted); }
+
+/* الأقسام */
+.section { padding-block: 3rem; border-block-start: 1px solid var(--line); }
+
+.section h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.4; margin-block-end: 1.75rem; }
+.section h2::after { content: ""; display: block; width: 3rem; height: 3px; background: var(--gold); margin-block-start: 0.625rem; }
+
+.cards { display: grid; gap: 1rem; }
+.card { border: 1px solid var(--line); border-block-start: 3px solid var(--gold); padding: 1.25rem; }
+.card h3 { font-size: 1.1875rem; font-weight: 600; line-height: 1.5; margin-block-end: 0.375rem; }
+.card p { color: var(--muted); }
+
+.about { display: grid; gap: 1.75rem; }
+.about h2 { margin-block-end: 0; }
+.about-text p + p { margin-block-start: 1rem; }
+.about-photo { display: block; width: 100%; max-width: 15rem; height: auto; }
+
+.steps { list-style: none; display: grid; gap: 1.25rem; }
+.steps li { display: flex; align-items: flex-start; gap: 1rem; }
+.num {
+  flex: none; width: 2.5rem; height: 2.5rem;
+  display: grid; place-items: center;
+  border: 2px solid var(--gold); border-radius: 50%;
+  font-weight: 700; direction: ltr;
+}
+.steps p { padding-block-start: 0.25rem; }
+
+/* سطور ثانوية */
+.note { color: var(--muted); font-size: 0.9375rem; margin-block-start: 1.5rem; }
+.about-text .note { margin-block-start: 1rem; }
+
+/* الأسئلة الشائعة */
+.faq { border-block-start: 1px solid var(--line); }
+.faq-item { border-block-end: 1px solid var(--line); }
+.faq-item summary {
+  position: relative; display: block; list-style: none; cursor: pointer;
+  min-height: 3rem; padding-block: 0.875rem; padding-inline-end: 2rem;
+  font-weight: 600; line-height: 1.6;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: ""; position: absolute; inset-inline-end: 0.5rem; top: 50%;
+  width: 0.625rem; height: 0.625rem; margin-block-start: -0.5rem;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); transition: transform 0.2s ease;   /* سهم للأسفل، يصبح للأعلى عند الفتح */
+}
+.faq-item[open] summary::after { transform: rotate(-135deg); margin-block-start: -0.125rem; }
+.faq-item p { color: var(--muted); padding-block: 0 1.25rem; }
+#faq .note { margin-block-end: 1.5rem; }
+
+/* التواصل */
+.section-dark { background: var(--ink); color: var(--bg); border-block-start: 0; }
+.contact { display: grid; gap: 1.25rem; margin-block-end: 2rem; }
+.contact dt { color: var(--line); font-size: 0.9375rem; }
+.contact dd { font-weight: 500; overflow-wrap: anywhere; }
+.contact a { text-decoration-color: var(--line); text-underline-offset: 4px; }
+.contact a[dir="ltr"] { display: inline-block; position: relative; }
+/* توسيع مساحة اللمس إلى 44 بكسل على الأقل دون تغيير الشكل */
+.contact a[dir="ltr"]::after { content: ""; position: absolute; inset-block: -0.4375rem; inset-inline: 0; }
+.addr-line { display: block; }
+.contact .sub { display: block; font-size: 0.9375rem; font-weight: 400; color: var(--line); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* التذييل */
+.footer { background: var(--ink); color: var(--line); border-block-start: 1px solid var(--muted); padding-block: 2rem 5.5rem; font-size: 0.9375rem; text-align: center; }
+.footer-title { font-size: 1rem; font-weight: 600; color: var(--bg); margin-block-end: 0.5rem; }
+.useful { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-direction: column; align-items: center; }
+.useful a { display: inline-block; padding-block: 0.625rem; text-decoration-color: var(--muted); text-underline-offset: 4px; }
+
+/* زر واتساب العائم (الجوال فقط) */
+.fab {
+  position: fixed; bottom: 1rem; left: 1rem; z-index: 10;   /* يسار الشاشة صراحةً، لأن بداية الأسطر على اليمين */
+  width: 2.75rem; height: 2.75rem; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--ink); color: var(--bg);
+  border: 2px solid var(--bg); border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--ink), 0 2px 8px rgba(36, 36, 36, 0.25);
+  text-decoration: none;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+.fab.show { opacity: 1; visibility: visible; pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fab { transition: none; }
+  .faq-item summary::after { transition: none; }
+}
+
+@media (min-width: 45rem) {
+  .hero { padding-block: 4rem 5rem; }
+  .hero h1 { font-size: 2.125rem; }
+  .brand-l1 { font-size: 1.5rem; }
+  .brand-l2 { font-size: 1.0625rem; }
+  .section { padding-block: 4.5rem; }
+  .section h2 { font-size: 1.75rem; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .about { grid-template-columns: 15rem 1fr; column-gap: 3rem; row-gap: 1.75rem; align-items: start; grid-template-rows: auto 1fr; }
+  .about-photo { grid-column: 1; grid-row: 1 / span 2; }
+  .about h2 { grid-column: 2; grid-row: 1; }
+  .about-text { grid-column: 2; grid-row: 2; }
+  .contact { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
+  .footer { padding-block-end: 2rem; }
+  .useful { flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 1.75rem; }
+  .fab { display: none; }
+}
+
+@media (min-width: 64rem) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  /* علامة مائية زخرفية في النصف الأيسر من الواجهة */
+  .hero::after {
+    content: ""; position: absolute; left: 4rem; top: 50%;
+    width: 26rem; height: 20.22rem; transform: translateY(-50%);
+    background: url("assets/logo.svg") center / contain no-repeat;
+    opacity: 0.07; pointer-events: none;
+  }
+}
