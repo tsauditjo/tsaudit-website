@@ -224,3 +224,27 @@ a.brand-link, a.brand-link:hover, a.brand-link:focus { display: inline-flex; col
 .footer-cma { margin-block-end: 0.75rem; }
 .footer-cma a { display: inline-block; padding-block: 0.625rem; text-decoration-color: var(--muted); text-underline-offset: 4px; }
 .note a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 4px; }
+
+/* قائمة التنقل */
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.25rem; margin-block: -1rem 1.75rem; font-size: 0.9375rem; }
+.hero-compact .nav { margin-block: 1rem 0; }
+.nav a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--bg); text-decoration: none; }
+.nav a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); }
+.nav-secondary { color: var(--line); font-size: 0.875rem; }
+@media (min-width: 45rem) { .nav-secondary { margin-inline-start: auto; } }
+.section h2, .article h2 { scroll-margin-top: 1.25rem; }
+
+/* سطر الحجز تحت الأزرار */
+.btn-hint { margin-block-start: 0.5rem; font-size: 0.875rem; color: var(--muted); }
+.hero .btn-hint { color: var(--line); }
+
+/* بطاقة المقال الواحدة بعرض كامل */
+#articles .cards:not(:has(> :nth-child(2))) { grid-template-columns: 1fr; }
+@media (min-width: 45rem) {
+  #articles .cards:not(:has(> :nth-child(2))) .card-link { display: grid; grid-template-columns: minmax(14rem, 1fr) 2fr; column-gap: 2rem; align-items: start; }
+  #articles .cards:not(:has(> :nth-child(2))) .card-link h3 { margin-block-end: 0; }
+}
+
+/* إطار التركيز داخل كتلة الدورة ومساحة لمس روابط المراجع */
+.course :focus-visible { outline-color: var(--ink); }
+.refs a, .refs-list a { display: inline-block; padding-block: 0.5rem; }
