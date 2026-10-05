@@ -197,3 +197,30 @@ a.brand-link, a.brand-link:hover, a.brand-link:focus { display: inline-flex; col
   .article h1 { font-size: 2.125rem; }
   .article h2 { font-size: 1.5rem; margin-block-start: 3.5rem; }
 }
+
+/* صفحة الأسئلة المتكررة عن الشهادة */
+.btn-outline-dark { border-color: var(--ink); color: var(--ink); }
+.btn-outline-dark:hover { background: var(--bg); }
+.cma h2 { scroll-margin-top: 1.5rem; }
+.cma h3 { font-size: 1.0625rem; font-weight: 600; margin-block: 1.25rem 0.5rem; }
+.cma-sub { margin-block-start: 0; margin-block-end: 1.25rem; }
+.cma-nav { color: var(--muted); line-height: 2.2; }
+.cma-nav a { color: var(--ink); text-decoration-color: var(--line); text-underline-offset: 4px; }
+.cma hr { border: 0; border-block-start: 1px solid var(--line); margin-block: 2.5rem; }
+.cma .faq { margin-block-end: 1rem; }
+.cma .faq-item p { margin-block-end: 1rem; }
+.cma .faq-item ol, .cma .faq-item ul, .cma .tips ul, .course ul { margin: 0 0 1rem; padding-inline-start: 1.25rem; display: grid; gap: 0.5rem; }
+.cma strong { font-weight: 600; }
+.table-wrap { overflow-x: auto; margin-block: 0.25rem 1.25rem; }
+.cma table { border-collapse: collapse; width: 100%; min-width: 20rem; font-size: 0.9375rem; line-height: 1.6; }
+.cma th, .cma td { border: 1px solid var(--line); padding: 0.5rem 0.75rem; text-align: start; vertical-align: top; }
+.cma th { background: var(--line); font-weight: 600; }
+.tips { margin-block: 1.5rem 2rem; }
+.course { background: var(--line); padding: 1.5rem 1.25rem; margin-block: 2.5rem; border-inline-start: 4px solid var(--gold); }
+.course h2 { margin-block-start: 0; }
+.course ul { margin-block-end: 1.5rem; }
+.refs-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.75rem; color: var(--muted); font-size: 0.9375rem; }
+.refs-list a { text-decoration-color: var(--line); text-underline-offset: 4px; }
+.footer-cma { margin-block-end: 0.75rem; }
+.footer-cma a { display: inline-block; padding-block: 0.625rem; text-decoration-color: var(--muted); text-underline-offset: 4px; }
+.note a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 4px; }
