@@ -25,6 +25,15 @@ h1, h2, h3, p, ol, dl, dd { margin: 0; padding: 0; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
+/* رابط التخطي إلى المحتوى: يظهر عند التركيز بلوحة المفاتيح فقط */
+.skip-link {
+  position: absolute; top: -100vh; inset-inline-start: 1rem; z-index: 20;
+  padding: 0.5rem 1rem; border-radius: 4px;
+  background: var(--ink); color: var(--bg); font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+#main:focus { outline: none; }
+
 .wrap { width: 100%; max-width: 68rem; margin-inline: auto; padding-inline: 1.25rem; }
 
 /* الواجهة */
@@ -163,6 +172,10 @@ a { color: inherit; }
 
 @media (min-width: 64rem) {
   .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* العلامة المائية من 70rem فقط، كي لا تلامس أسطر العنوان الرئيسي بين 64 و70rem */
+@media (min-width: 70rem) {
   /* علامة مائية زخرفية في النصف الأيسر من الواجهة */
   .hero::after {
     content: ""; position: absolute; left: 4rem; top: 50%;
