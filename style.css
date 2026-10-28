@@ -176,9 +176,10 @@ a { color: inherit; }
 
 /* العلامة المائية من 70rem فقط، كي لا تلامس أسطر العنوان الرئيسي بين 64 و70rem */
 @media (min-width: 70rem) {
-  /* علامة مائية زخرفية في النصف الأيسر من الواجهة */
+  /* علامة مائية زخرفية في النصف الأيسر من الواجهة. موضعها مربوط بحافة حاوية المحتوى
+     (68rem ناقص الحشو 1.25rem) لا بحافة الشاشة، كي لا تبتعد عن النص على الشاشات العريضة */
   .hero::after {
-    content: ""; position: absolute; left: 4rem; top: 50%;
+    content: ""; position: absolute; left: max(4rem, calc(50% - 32.75rem)); top: 50%;
     width: 26rem; height: 20.22rem; transform: translateY(-50%);
     background: url("assets/logo.svg") center / contain no-repeat;
     opacity: 0.07; pointer-events: none;
