@@ -267,3 +267,25 @@ a.brand-link, a.brand-link:hover, a.brand-link:focus { display: inline-flex; col
 /* إطار التركيز داخل كتلة الدورة ومساحة لمس روابط المراجع */
 .course :focus-visible { outline-color: var(--ink); }
 .refs a, .refs-list a { display: inline-block; padding-block: 0.5rem; }
+
+/* الطباعة: إخفاء ما لا يفيد على الورق، وتوفير الحبر، وإظهار عناوين الروابط الخارجية.
+   فتح الأسئلة المطوية عند الطباعة يتولاه assets/fab.js لأن CSS لا يستطيع فتح details. */
+@media print {
+  html { scroll-behavior: auto; }
+  .skip-link, .nav, .fab, .actions, .btn, .btn-hint, .footer, .cma-nav { display: none !important; }
+  .hero, .section-dark { background: none; color: var(--ink); }
+  .hero::after { display: none; }
+  .hero { padding-block: 1rem 1.5rem; border-block-end: 1px solid var(--line); }
+  .brand { margin-block-end: 1rem; }
+  .faq-item summary::after { display: none; }
+  .faq-item summary { font-weight: 700; }
+  h2, h3, summary { break-after: avoid; }
+  .faq-item, .card, .table-wrap, figure { break-inside: avoid; }
+  /* الشبكات لا تتجزأ جيداً بين الصفحات، فتُطبع البطاقات كتلاً متتالية */
+  .cards, .about { display: block; }
+  .card { margin-block-end: 1rem; }
+  #main a[href^="http"]:not(.btn)::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em; color: var(--muted); direction: ltr; unicode-bidi: embed; word-break: break-all;
+  }
+}
