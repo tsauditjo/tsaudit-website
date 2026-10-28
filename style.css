@@ -230,9 +230,13 @@ a.brand-link, a.brand-link:hover, a.brand-link:focus { display: inline-flex; col
 .cma .faq-item ol, .cma .faq-item ul, .cma .tips ul, .course ul { margin: 0 0 1rem; padding-inline-start: 1.25rem; display: grid; gap: 0.5rem; }
 .cma strong { font-weight: 600; }
 .table-wrap { overflow-x: auto; margin-block: 0.25rem 1.25rem; }
-.cma table { border-collapse: collapse; width: 100%; min-width: 20rem; font-size: 0.9375rem; line-height: 1.6; }
+/* لا حد أدنى لعرض الجدول كي يتسع للحاوية عند 320 بكسل، وحاوية التمرير تبقى شبكة أمان */
+.cma table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; line-height: 1.6; }
 .cma th, .cma td { border: 1px solid var(--line); padding: 0.5rem 0.75rem; text-align: start; vertical-align: top; }
 .cma th { background: var(--line); font-weight: 600; }
+@media (max-width: 22.5rem) {
+  .cma th, .cma td { padding: 0.5rem 0.4rem; font-size: 0.875rem; }
+}
 .tips { margin-block: 1.5rem 2rem; }
 .course { background: var(--line); padding: 1.5rem 1.25rem; margin-block: 2.5rem; border-inline-start: 4px solid var(--gold); }
 .course h2 { margin-block-start: 0; }
