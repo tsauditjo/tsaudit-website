@@ -256,9 +256,9 @@ a.brand-link, a.brand-link:hover, a.brand-link:focus { display: inline-flex; col
 .nav a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); }
 .nav-secondary { color: var(--line); font-size: 0.875rem; }
 @media (min-width: 45rem) { .nav-secondary { margin-inline-start: auto; } }
-/* تحت 22.5rem تضيق الفجوات والخط قليلاً كي تبقى عناصر القائمة الخمسة على سطر واحد */
+/* تحت 22.5rem تضيق الفجوات والخط كي تبقى عناصر القائمة الخمسة على سطر واحد حتى مع الخط البديل قبل تحميل خط جوجل */
 @media (max-width: 22.5rem) {
-  .nav { gap: 0 0.5rem; font-size: 0.875rem; }
+  .nav { gap: 0 0.5rem; font-size: 0.8125rem; }
   .nav-secondary { font-size: 0.8125rem; }
 }
 .section h2, .article h2 { scroll-margin-top: 1.25rem; }
