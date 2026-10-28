@@ -1,3 +1,17 @@
+/* الطباعة: فتح الأسئلة المطوية قبل الطباعة كي تُطبع أجوبتها، ثم إعادتها كما كانت. */
+(function () {
+  var opened = [];
+  window.addEventListener('beforeprint', function () {
+    opened = [];
+    var items = document.querySelectorAll('details:not([open])');
+    for (var i = 0; i < items.length; i++) { items[i].open = true; opened.push(items[i]); }
+  });
+  window.addEventListener('afterprint', function () {
+    for (var i = 0; i < opened.length; i++) opened[i].open = false;
+    opened = [];
+  });
+})();
+
 /* زر واتساب العائم: يظهر بعد الواجهة، ويُخفى فوق الأقسام المحددة في data-hide-over،
    وعندما يقع فوق نص أي رابط أو زر، ثم يعود بعد لحظة من زوال التقاطع. */
 (function () {
