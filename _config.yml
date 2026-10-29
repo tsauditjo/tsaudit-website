@@ -1,0 +1,6 @@
+# إعدادات النشر على GitHub Pages: استثناء الملفات الداخلية من الموقع المنشور
+exclude:
+  - tools
+  - CLAUDE.md
+  - README.md
+  - _config.yml
