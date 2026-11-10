@@ -3,9 +3,9 @@
 أداة صورة المنشور لمقالات موقع مكتب تيسير صافي لتدقيق الحسابات.
 
 الاستخدام من جذر المستودع:
-    node tools/social-image/make_social_image.js "عنوان المقال" images/social/slug.jpg [--kicker "سطر صغير"]
+    node tools/social-image/make_social_image.js "عنوان المقال" images/social/slug.jpg [--kicker "سطر صغير"] [--og]
 
-تنتج صورة مربعة 1080×1080 بصيغة JPEG بهوية المكتب (فحمي وذهبي، خط IBM Plex Sans Arabic)
+تنتج صورة مربعة 1080×1080 بصيغة JPEG، أو صورة معاينة الروابط 1200×630 مع المعامل --og، بهوية المكتب (فحمي وذهبي، خط IBM Plex Sans Arabic)
 وتتحقق بعد الإنتاج من الصيغة والأبعاد والحجم. الخطوط مرفقة في مجلد fonts بجوار الملف.
 المتطلبات: Node مع حزمة playwright ومتصفح Chromium الخاص بها، وهما مثبتان في بيئة
 الجلسات السحابية لكلود كود بلا أي تثبيت إضافي.
@@ -27,7 +27,9 @@ const DEFAULT_KICKER = 'مقال جديد على موقع المكتب';
 const CHARCOAL = '#2B2B2B';
 const GOLD = '#B8954A';
 const MAX_BYTES = 1000000;
-const SIZE = 1080;
+let W = 1080;
+let H = 1080;
+let PAD = 96;
 
 function fail(msg) {
   process.stderr.write(msg + '\n');
@@ -46,7 +48,9 @@ function escapeHtml(s) {
 
 function buildHtml(title, kicker) {
   const n = [...title].length; // عدّ الأحرف لا البايتات
-  const size = n <= 45 ? 72 : n <= 70 ? 62 : n <= 95 ? 54 : 46;
+  const og = H < W;
+  const size = og ? (n <= 45 ? 58 : n <= 70 ? 50 : n <= 95 ? 44 : 38) : (n <= 45 ? 72 : n <= 70 ? 62 : n <= 95 ? 54 : 46);
+  const small = og ? 24 : 30;
   return `<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -55,14 +59,14 @@ function buildHtml(title, kicker) {
 @font-face { font-family: "PlexAr"; src: url("${fontUri('IBMPlexSansArabic-Bold.ttf')}"); font-weight: 700; }
 @font-face { font-family: "PlexAr"; src: url("${fontUri('IBMPlexSansArabic-Regular.ttf')}"); font-weight: 400; }
 @font-face { font-family: "PlexLat"; src: url("${fontUri('IBMPlexSans-Regular.ttf')}"); font-weight: 400; }
-html, body { margin: 0; width: ${SIZE}px; height: ${SIZE}px; background: ${CHARCOAL}; color: #ffffff; font-family: "PlexAr", sans-serif; }
-.wrap { box-sizing: border-box; width: ${SIZE}px; height: ${SIZE}px; padding: 96px; display: flex; flex-direction: column; justify-content: space-between; }
+html, body { margin: 0; width: ${W}px; height: ${H}px; background: ${CHARCOAL}; color: #ffffff; font-family: "PlexAr", sans-serif; }
+.wrap { box-sizing: border-box; width: ${W}px; height: ${H}px; padding: ${PAD}px; display: flex; flex-direction: column; justify-content: space-between; }
 .rule { width: 120px; height: 6px; background: ${GOLD}; border-radius: 3px; }
-.kicker { color: ${GOLD}; font-size: 30px; font-weight: 400; margin-bottom: 28px; }
+.kicker { color: ${GOLD}; font-size: ${small}px; font-weight: 400; margin-bottom: ${og ? 16 : 28}px; }
 h1 { margin: 0; font-weight: 700; font-size: ${size}px; line-height: 1.35; text-align: right; overflow-wrap: break-word; }
-.foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #4a4a4a; padding-top: 36px; }
-.brand { font-size: 30px; font-weight: 700; }
-.site { font-family: "PlexLat", sans-serif; font-size: 28px; color: ${GOLD}; direction: ltr; }
+.foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #4a4a4a; padding-top: ${og ? 24 : 36}px; }
+.brand { font-size: ${small}px; font-weight: 700; }
+.site { font-family: "PlexLat", sans-serif; font-size: ${small - 2}px; color: ${GOLD}; direction: ltr; }
 </style>
 </head>
 <body>
@@ -86,15 +90,16 @@ async function render(pageHtml, out) {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   const browser = await chromium.launch();
   try {
-    const page = await browser.newPage({ viewport: { width: SIZE, height: SIZE }, deviceScaleFactor: 1 });
+    const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
     await page.setContent(pageHtml, { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(300);
     // هل خرج العنوان عن حدود الصورة؟ يُفحص قبل اللقطة
-    const overflow = await page.evaluate(() => {
+    const overflow = await page.evaluate(([h, pad]) => {
       const r = document.querySelector('h1').getBoundingClientRect();
-      return r.bottom > 1080 - 96 || r.top < 96;
-    });
+      const f = document.querySelector('.foot').getBoundingClientRect();
+      return r.bottom > f.top || r.top < pad || f.bottom > h - pad + 1;
+    }, [H, PAD]);
     await page.screenshot({ path: out, type: 'jpeg', quality: 88, fullPage: false });
     return overflow;
   } finally {
@@ -122,10 +127,10 @@ function verify(out, overflow) {
   const buf = fs.readFileSync(out);
   const dims = jpegSize(buf);
   if (!dims) fail('الصيغة ليست JPEG أو الملف تالف');
-  if (dims.width !== SIZE || dims.height !== SIZE) fail(`الأبعاد ليست ${SIZE}×${SIZE}: ${dims.width}×${dims.height}`);
+  if (dims.width !== W || dims.height !== H) fail(`الأبعاد ليست ${W}×${H}: ${dims.width}×${dims.height}`);
   if (buf.length > MAX_BYTES) fail(`حجم الملف يتجاوز الحد: ${buf.length} بايت`);
   if (overflow) fail('العنوان أطول من مساحة الصورة؛ قصّره أو غيّر صياغته');
-  console.log(`تم: ${out} (${buf.length} بايت، ${SIZE}×${SIZE}، JPEG)`);
+  console.log(`تم: ${out} (${buf.length} بايت، ${W}×${H}، JPEG)`);
 }
 
 function parseArgs(argv) {
@@ -133,6 +138,7 @@ function parseArgs(argv) {
   const rest = [];
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--kicker') { args.kicker = argv[++i] || ''; continue; }
+    if (argv[i] === '--og') { W = 1200; H = 630; PAD = 64; continue; }
     rest.push(argv[i]);
   }
   args.title = rest[0];
